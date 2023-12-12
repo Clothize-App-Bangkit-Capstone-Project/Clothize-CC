@@ -33,7 +33,7 @@ Response Body Error :
 
 ## UPDATE Customer Api
 
-Endpoints: GET /api/customers/...
+Endpoints: PATCH /api/customers/...
 
 Header :
 
