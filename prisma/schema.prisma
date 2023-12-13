@@ -18,6 +18,7 @@ model User {
   isVerified Boolean   @default(false)
   role       String    @default("customer") @db.VarChar(20)
   Customer   Customer?
+  Tailor     Tailor?
 
   @@map("users")
 }
@@ -32,4 +33,16 @@ model Customer {
   user_id         String  @unique
 
   @@map("customers")
+}
+
+model Tailor {
+  tailor_id       String  @id @default(uuid())
+  name            String  @db.VarChar(100)
+  address         String? @db.VarChar(255)
+  description     String? @db.VarChar(255)
+  profile_picture String? @db.VarChar(255)
+  user            User    @relation(fields: [user_id], references: [user_id])
+  user_id         String  @unique
+
+  @@map("tailors")
 }
