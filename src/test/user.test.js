@@ -3,7 +3,7 @@ import { app } from "../application/app";
 import { prismaClient } from "../application/database";
 import { logger } from "../application/logging";
 
-describe("POST /api/users", () => {
+describe("POST /api/users/register", () => {
 
     afterEach(async () => {
         await prismaClient.user.deleteMany({
@@ -15,7 +15,7 @@ describe("POST /api/users", () => {
 
     it("should register a new user", async () => {
         const result = await supertest(app)
-            .post('/api/users')
+            .post('/api/users/register')
             .send({
                 username: "test",
                 password: "test",

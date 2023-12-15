@@ -15,8 +15,8 @@ CREATE TABLE `users` (
 CREATE TABLE `customers` (
     `customer_id` VARCHAR(191) NOT NULL,
     `full_name` VARCHAR(100) NULL,
-    `address` VARCHAR(255) NOT NULL,
-    `phone_number` VARCHAR(20) NOT NULL,
+    `address` VARCHAR(255) NULL,
+    `phone_number` VARCHAR(20) NULL,
     `profile_picture` VARCHAR(255) NULL,
     `user_id` VARCHAR(191) NOT NULL,
 

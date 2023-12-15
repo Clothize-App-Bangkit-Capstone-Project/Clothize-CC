@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
-import { loginUserValidation, registerUserValidation } from "../validation/user-validation";
+import { getUserValidation, loginUserValidation, registerUserValidation } from "../validation/user-validation";
 import { validate } from "../validation/validation";
 
 const register = async (request) => {
@@ -34,12 +35,15 @@ const login = async (request) => {
 
     const user = await prismaClient.user.findUnique({
         where: {
-            username: userLogin.username
+            username: userLogin.username,
         },
         select: {
+            user_id: true,
             username: true,
-            password: true
+            password: true,
+            email: true
         }
+
     });
 
     if (!user) {
@@ -51,9 +55,49 @@ const login = async (request) => {
     if (!isPasswordCorrect) {
         throw new ResponseError(401, "Username or password are incorrect!")
     }
+
+
+    const data = {
+        user_id: user.user_id,
+        username: user.username,
+        email: user.email
+    }
+
+    const activeToken = jwt.sign({ data }, process.env.JWT_SECRET, { expiresIn: '1h' })
+
+    const response = {
+        token: activeToken
+    };
+
+    return response;
+}
+
+const get = async (username) => {
+    username = validate(getUserValidation, username);
+
+    const user = await prismaClient.user.findUnique({
+        where: {
+            username: username
+        },
+        select: {
+            user_id: true,
+            username: true,
+            email: true,
+            isVerified: true,
+            role: true
+        }
+    });
+
+    if (!user) {
+        throw new ResponseError(404, "User is not found!");
+    }
+
+    return user;
 }
 
 export default {
-    register
+    register,
+    login,
+    get
 };
 
