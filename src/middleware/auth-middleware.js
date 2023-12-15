@@ -9,21 +9,22 @@ const authMiddleware = async (req, res, next) => {
         res.status(401).json({
             errors: "Unauthorized"
         }).end();
+    } else {
+        const token = header.split(" ").pop();
+
+        const user = verifyAccessToken(token);
+
+        if (!user) {
+            throw new ResponseError(403, "Forbidden!");
+        }
+
+        logger.info(token);
+        logger.info(user);
+        req.user = user.data;
+
+        next();
     }
 
-    const token = header.split(" ").pop();
-
-    const user = verifyAccessToken(token);
-
-    if (!user) {
-        throw new ResponseError(403, "Forbidden!");
-    }
-
-    logger.info(token);
-    logger.info(user);
-    req.user = user.data;
-
-    next();
 }
 
 const verifyAccessToken = (token) => {
