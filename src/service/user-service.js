@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
-import { getUserValidation, loginUserValidation, registerUserValidation } from "../validation/user-validation";
+import { getUserValidation, loginUserValidation, registerUserValidation, updateUserValidation } from "../validation/user-validation";
 import { validate } from "../validation/validation";
 
 const register = async (request) => {
@@ -41,7 +41,9 @@ const login = async (request) => {
             user_id: true,
             username: true,
             password: true,
-            email: true
+            email: true,
+            isVerified: true,
+            role: true
         }
 
     });
@@ -60,10 +62,12 @@ const login = async (request) => {
     const data = {
         user_id: user.user_id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        isVerified: user.isVerified,
+        role: user.role
     }
 
-    const activeToken = jwt.sign({ data }, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const activeToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: 60 })
 
     const response = {
         token: activeToken
@@ -95,9 +99,56 @@ const get = async (username) => {
     return user;
 }
 
+const update = async (request) => {
+    const user = validate(updateUserValidation, request);
+
+    const isUserExist = await prismaClient.user.count({
+        where: {
+            user_id: user.user_id
+        }
+    });
+
+    if (!isUserExist) {
+        throw new ResponseError(404, "User not found")
+    }
+
+    const data = {};
+
+    if (user.username) {
+        data.username = user.username;
+    }
+    if (user.password) {
+        data.password = await bcrypt.hash(user.password, 10);
+    }
+    if (user.email) {
+        data.email = user.email;
+    }
+    if (user.isVerified) {
+        data.isVerified = user.isVerified;
+    }
+    if (user.role) {
+        data.role = user.role;
+    }
+
+    return prismaClient.user.update({
+        where: {
+            user_id: user.user_id
+        },
+        data: data,
+        select: {
+            user_id: true,
+            username: true,
+            email: true,
+            isVerified: true,
+            role: true
+        }
+    });
+}
+
 export default {
     register,
     login,
-    get
+    get,
+    update
 };
 

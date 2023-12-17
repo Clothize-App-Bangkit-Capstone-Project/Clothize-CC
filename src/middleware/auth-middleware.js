@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { logger } from "../application/logging";
-import { ResponseError } from "../error/response-error";
 
 const authMiddleware = async (req, res, next) => {
     const header = req.get('Authorization');
@@ -14,15 +13,18 @@ const authMiddleware = async (req, res, next) => {
 
         const user = verifyAccessToken(token);
 
-        if (!user) {
-            throw new ResponseError(403, "Forbidden!");
+        if (!user.success) {
+            res.status(403).json({
+                error: user.errors
+            }).end();
+        } else {
+            logger.info(token);
+            logger.info(user);
+            req.user = user.data;
+
+            next();
         }
 
-        logger.info(token);
-        logger.info(user);
-        req.user = user.data;
-
-        next();
     }
 
 }
@@ -33,10 +35,12 @@ const verifyAccessToken = (token) => {
     try {
         const decoded = jwt.verify(token, secret);
         return {
-            data: decoded
+            data: decoded,
+            success: true
         }
     } catch (error) {
         return {
+            success: false,
             errors: error.message
         }
     }
