@@ -35,7 +35,8 @@ const login = async (request) => {
 
     const user = await prismaClient.user.findUnique({
         where: {
-            username: userLogin.username,
+            email: userLogin.email,
+            username: userLogin.username
         },
         select: {
             user_id: true,
@@ -70,7 +71,8 @@ const login = async (request) => {
     const activeToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: 60 })
 
     const response = {
-        token: activeToken
+        token: activeToken,
+        email: user.email
     };
 
     return response;

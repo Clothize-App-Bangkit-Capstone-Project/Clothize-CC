@@ -5,7 +5,8 @@ const register = async (req, res, next) => {
     try {
         const result = await userService.register(req.body);
         res.status(200).json({
-            data: result
+            message: result,
+            status: true,
         });
     } catch (error) {
         next(error);
@@ -16,7 +17,8 @@ const login = async (req, res, next) => {
     try {
         const result = await userService.login(req.body);
         res.status(200).json({
-            data: result
+            message: result,
+            status: true
         })
     } catch (error) {
         next(error);
@@ -29,7 +31,8 @@ const get = async (req, res, next) => {
         const result = await userService.get(username)
 
         res.status(200).json({
-            data: result
+            data: result,
+            message: "Success"
         });
     } catch (error) {
         next(error);

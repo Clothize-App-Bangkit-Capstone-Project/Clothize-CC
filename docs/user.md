@@ -129,27 +129,3 @@ Response Body Error :
 	"errors": "Unauthorized"
 }
 ```
-
-## Logout User API
-
-Endpoint : DELETE /api/users/logout
-
-Headers :
-
-- Authorization : token
-
-Response Body Success :
-
-```json
-{
-	"data": "OK"
-}
-```
-
-Response Body Error :
-
-```json
-{
-	"errors": "Unauthorized"
-}
-```
