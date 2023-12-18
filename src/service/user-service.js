@@ -110,7 +110,7 @@ const update = async (request) => {
         }
     });
 
-    if (!isUserExist) {
+    if (isUserExist !== 1) {
         throw new ResponseError(404, "User not found")
     }
 

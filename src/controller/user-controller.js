@@ -50,8 +50,8 @@ const update = async (req, res, next) => {
 
         const result = await userService.update(request);
         res.status(200).json({
-            data: result,
-            message: 'User updated successfully'
+            message: result,
+            status: true
         });
     } catch (error) {
         next(error);

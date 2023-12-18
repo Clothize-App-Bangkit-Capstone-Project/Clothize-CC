@@ -13,6 +13,9 @@ userRouter.patch('/api/users/current', userController.update);
 
 //CUSTOMER API
 userRouter.post('/api/customers/current', customerController.register)
+userRouter.get('/api/customers/current', customerController.get)
+userRouter.patch('/api/customers/current', customerController.update)
+userRouter.post('/api/customers/upload', customerController.upload)
 
 export {
     userRouter

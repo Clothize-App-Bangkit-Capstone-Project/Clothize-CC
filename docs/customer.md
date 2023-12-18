@@ -2,7 +2,7 @@
 
 ## GET Customer Api
 
-Endpoints: GET /api/customers/...
+Endpoints: POST /api/customers/current
 
 Header :
 
