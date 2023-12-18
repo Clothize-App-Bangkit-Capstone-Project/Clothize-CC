@@ -68,7 +68,7 @@ const login = async (request) => {
         role: user.role
     }
 
-    const activeToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: 60 })
+    const activeToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: 60 * 30 })
 
     const response = {
         token: activeToken,

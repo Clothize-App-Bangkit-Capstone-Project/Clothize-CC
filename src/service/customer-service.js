@@ -15,6 +15,8 @@ const register = async (request) => {
         throw new ResponseError(400, "Customer already exists!")
     }
 
+    
+
     return prismaClient.customer.create({
         data: customer,
     })

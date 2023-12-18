@@ -31,8 +31,8 @@ const get = async (req, res, next) => {
         const result = await userService.get(username)
 
         res.status(200).json({
-            data: result,
-            message: "Success"
+            message: result,
+            status: true
         });
     } catch (error) {
         next(error);

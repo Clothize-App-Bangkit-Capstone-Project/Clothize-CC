@@ -2,15 +2,15 @@
 
 ## Register User Api
 
-Endpoint : POST /api/register/
+Endpoint : POST /api/users/register
 
 Request Body :
 
 ```json
 {
-	"username": "test",
-	"password": "test",
-	"email": "test@example.com"
+	"username": "test1",
+	"password": "test1",
+	"email": "test1@gmail.com"
 }
 ```
 
@@ -18,11 +18,12 @@ Response Body Success :
 
 ```json
 {
-	"data": {
-		"id": "unique id",
-		"username": "test",
-		"email": "test@example.com"
-	}
+	"message": {
+		"user_id": "unique id",
+		"username": "test1",
+		"email": "test1@gmail.com"
+	},
+	"status": true
 }
 ```
 
@@ -30,20 +31,21 @@ Response Body Error :
 
 ```json
 {
-	"errors": "Username is already exist!"
+	"message": "Username already exists!",
+	"status": false
 }
 ```
 
 ## Login User Api
 
-Endpoint : Get /api/users/login
+Endpoint : POST /api/users/login
 
 Request Body :
 
 ```json
 {
-	"username": "test",
-	"password": "test"
+	"email": "test1@gmail.com",
+	"password": "test1"
 }
 ```
 
@@ -51,9 +53,11 @@ Response Body Success :
 
 ```json
 {
-	"data": {
-		"token": "unique token"
-	}
+	"message": {
+		"token": "jwt token",
+		"email": "test1@gmail.com"
+	},
+	"status": true
 }
 ```
 
@@ -61,13 +65,14 @@ Response Body Error :
 
 ```json
 {
-	"errors": "Username or password incorrect!"
+	"message": "Username or password are incorrect!",
+	"status": false
 }
 ```
 
 ## Update User Api
 
-Endpoint : Get /api/users/...
+Endpoint : PATCH /api/users/current
 
 Header :
 
@@ -77,8 +82,12 @@ Request Body :
 
 ```json
 {
+	//semua optional
+	"username": "zaribaed",
 	"password": "test",
-	"email": "test@example.com"
+	"email": "wowo@gmail.com",
+	"role": "tailor",
+	"isVerified": true
 }
 ```
 
@@ -86,11 +95,14 @@ Response Success :
 
 ```json
 {
-	"data": {
-		"username": "test",
-		"password": "test",
-		"email": "test@example.com"
-	}
+	"message": {
+		"user_id": "unique id",
+		"username": "zaribaed",
+		"email": "wowo@gmail.com",
+		"isVerified": true,
+		"role": "tailor"
+	},
+	"status": true
 }
 ```
 
@@ -98,13 +110,14 @@ Response Body Error :
 
 ```json
 {
-	"errors": "Please fill the password field"
+	"message": "User not found!",
+	"status": false
 }
 ```
 
 ## GET User Api
 
-Endpoint : GET /api/users/...
+Endpoint : GET /api/users/current
 
 Headers :
 
@@ -114,11 +127,14 @@ Response Body Success :
 
 ```json
 {
-	"data": {
-		"id": "unique id",
-		"username": "test",
-		"email": "test@example.com"
-	}
+	"message": {
+		"user_id": "unique id",
+		"username": "test1",
+		"email": "test1@gmail.com",
+		"isVerified": false,
+		"role": "customer"
+	},
+	"status": true
 }
 ```
 
@@ -126,6 +142,7 @@ Response Body Error :
 
 ```json
 {
-	"errors": "Unauthorized"
+	"message": "Unauthorized",
+	"status": false
 }
 ```
