@@ -11,15 +11,15 @@ datasource db {
 }
 
 model User {
-  user_id     String       @id @default(uuid())
-  username    String       @unique @db.VarChar(100)
-  password    String       @db.VarChar(100)
-  email       String       @unique @db.VarChar(150)
-  isVerified  Boolean      @default(false)
-  role        String       @default("customer") @db.VarChar(20)
-  Customer    Customer?
-  Tailor      Tailor?
-  Measurement Measurement?
+  user_id      String        @id @default(uuid())
+  username     String        @unique @db.VarChar(100)
+  password     String        @db.VarChar(100)
+  email        String        @unique @db.VarChar(150)
+  isVerified   Boolean       @default(false)
+  role         String        @default("customer") @db.VarChar(20)
+  Customer     Customer?
+  Tailor       Tailor?
+  measurements Measurement[]
 
   @@map("users")
 }
@@ -49,18 +49,20 @@ model Tailor {
 }
 
 model Measurement {
-  measurement_id      String @id @default(uuid())
-  clothing_size       String @db.VarChar(6)
-  picture             String @db.VarChar(255)
+  measurement_id      Int      @id @default(autoincrement())
+  clothing_type       String   @db.VarChar(100)
+  clothing_size       String   @db.VarChar(6)
+  picture             String?  @db.VarChar(255)
   body_circumstances  Int
   shoulder_width      Int
   body_length         Int
   chest_circumstances Int
-  gender              String @db.VarChar(100)
+  gender              String   @db.VarChar(100)
   height              Int
   weight              Int
-  user                User   @relation(fields: [user_id], references: [user_id])
-  user_id             String @unique
+  createdAt           DateTime @default(now())
+  user_id             String   @db.VarChar(255)
+  User                User     @relation(fields: [user_id], references: [user_id])
 
   @@map("measurements")
 }

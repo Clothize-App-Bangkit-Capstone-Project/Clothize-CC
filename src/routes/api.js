@@ -1,5 +1,6 @@
 import express from "express";
 import customerController from "../controller/customer-controller";
+import measurementController from "../controller/measurement-controller";
 import userController from "../controller/user-controller";
 import { authMiddleware } from '../middleware/auth-middleware';
 
@@ -17,10 +18,15 @@ userRouter.get('/api/customers/current', customerController.get)
 userRouter.patch('/api/customers/current', customerController.update)
 userRouter.post('/api/customers/upload', customerController.upload)
 
-//ORDER API
-userRouter.post('/api/orders/create', orderController.createOrder);
-userRouter.get('/api/orders/:username', orderController.getAllOrdersByClientUsername);
-userRouter.get('/api/orders/detail/:orderId', orderController.getOrderDetailByOrderId);
+//MEASUREMENT API
+userRouter.post('/api/measurements/current', measurementController.insert)
+userRouter.get('/api/measurements/current', measurementController.getAll)
+userRouter.post('/api/measurements/upload/:measurementId', measurementController.upload)
+
+// //ORDER API
+// userRouter.post('/api/orders/create', orderController.createOrder);
+// userRouter.get('/api/orders/:username', orderController.getAllOrdersByClientUsername);
+// userRouter.get('/api/orders/detail/:orderId', orderController.getOrderDetailByOrderId);
 
 export {
     userRouter

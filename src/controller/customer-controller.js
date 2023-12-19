@@ -1,6 +1,6 @@
 import { Storage } from "@google-cloud/storage";
 import { logger } from "../application/logging";
-import { processFileMiddleware } from "../middleware/upload-middleware";
+import { processFileCustomerMiddleware } from "../middleware/upload-middleware";
 import customerService from "../service/customer-service";
 
 const storage = new Storage({ keyFilename: "cloud-secret-keys.json" })
@@ -60,7 +60,7 @@ const update = async (req, res, next) => {
 
 const upload = async (req, res, next) => {
     try {
-        await processFileMiddleware(req, res);
+        await processFileCustomerMiddleware(req, res);
 
         if (!req.file) {
             return res.status(400).json({
