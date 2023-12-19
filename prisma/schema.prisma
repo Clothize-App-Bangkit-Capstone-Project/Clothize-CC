@@ -39,8 +39,11 @@ model Tailor {
   tailor_id       String  @id @default(uuid())
   name            String  @db.VarChar(100)
   address         String? @db.VarChar(255)
+  phone_number    String? @db.VarChar(20)
   description     String? @db.VarChar(255)
   profile_picture String? @db.VarChar(255)
+  longitude       Float
+  latitude        Float
   user            User    @relation(fields: [user_id], references: [user_id])
   user_id         String  @unique
 
