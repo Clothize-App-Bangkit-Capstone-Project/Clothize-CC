@@ -22,18 +22,19 @@ Request Body :
 
 Response Body Succes :
 
-````json
+```json
 {
-    "message": {
-        "customer_id": "17227332-4f7e-4f89-a5f6-05d8bc0a1638",
-        "full_name": "Ahmad Azhari",
-        "address": "Indonesia",
-        "phone_number": "628314567890",
-        "profile_picture": "https://storage.googleapis.com/clothize-app/default-profile-pict.png",
-        "user_id": "47258c13-4f3a-4982-bf36-56b428dad210"
-    },
-    "status": true
+	"message": {
+		"customer_id": "17227332-4f7e-4f89-a5f6-05d8bc0a1638",
+		"full_name": "Ahmad Azhari",
+		"address": "Indonesia",
+		"phone_number": "628314567890",
+		"profile_picture": "https://storage.googleapis.com/clothize-app/default-profile-pict.png",
+		"user_id": "47258c13-4f3a-4982-bf36-56b428dad210"
+	},
+	"status": true
 }
+```
 
 Response Body Error :
 
@@ -42,7 +43,7 @@ Response Body Error :
 	"message": "Customer already exist!",
 	"status": false
 }
-````
+```
 
 ## UPDATE Customer Api
 
@@ -65,16 +66,16 @@ Request Body :
 
 Response Body Succes :
 
-````json
+```json
 {
-    "message": {
-        "customer_id": "17227332-4f7e-4f89-a5f6-05d8bc0a1638",
-        "full_name": "Valentino Rossi",
-        "address": "Italia",
-        "phone_number": "628314567890",
-        "user_id": "47258c13-4f3a-4982-bf36-56b428dad210"
-    },
-    "status": true
+	"message": {
+		"customer_id": "17227332-4f7e-4f89-a5f6-05d8bc0a1638",
+		"full_name": "Valentino Rossi",
+		"address": "Italia",
+		"phone_number": "628314567890",
+		"user_id": "47258c13-4f3a-4982-bf36-56b428dad210"
+	},
+	"status": true
 }
 ```
 
@@ -85,7 +86,7 @@ Response Body Error :
 	"message": "Customer already exist!",
 	"status": false
 }
-````
+```
 
 ## UPDATE Customer Profile Picture Api
 
@@ -108,13 +109,13 @@ Request Body :
 
 Response Body Succes :
 
-````json
+```json
 {
-    "message": {
-        "customer_id": "17227332-4f7e-4f89-a5f6-05d8bc0a1638",
-        "profile_picture": "https://storage.googleapis.com/clothize-app/userfile.png"
-    },
-    "status": true
+	"message": {
+		"customer_id": "17227332-4f7e-4f89-a5f6-05d8bc0a1638",
+		"profile_picture": "https://storage.googleapis.com/clothize-app/userfile.png"
+	},
+	"status": true
 }
 ```
 
@@ -122,10 +123,10 @@ Response Body Error :
 
 ```json
 {
-    "message": "Please upload a file!",
-    "status": false
+	"message": "Please upload a file!",
+	"status": false
 }
-````
+```
 
 ## GET Customer Api
 
