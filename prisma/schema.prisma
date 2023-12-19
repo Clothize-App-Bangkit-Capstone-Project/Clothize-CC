@@ -49,3 +49,5 @@ model Tailor {
 
   @@map("tailors")
 }
+
+
