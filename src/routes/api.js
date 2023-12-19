@@ -17,6 +17,11 @@ userRouter.get('/api/customers/current', customerController.get)
 userRouter.patch('/api/customers/current', customerController.update)
 userRouter.post('/api/customers/upload', customerController.upload)
 
+//ORDER API
+userRouter.post('/api/orders/create', orderController.createOrder);
+userRouter.get('/api/orders/:username', orderController.getAllOrdersByClientUsername);
+userRouter.get('/api/orders/detail/:orderId', orderController.getOrderDetailByOrderId);
+
 export {
     userRouter
 };
