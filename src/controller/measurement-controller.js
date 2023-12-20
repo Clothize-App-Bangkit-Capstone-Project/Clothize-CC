@@ -84,7 +84,7 @@ const upload = async (req, res, next) => {
             const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
 
             const userId = req.user.user_id
-            const measurementId = req.params
+            const measurementId = parseInt(req.params.measurement_id)
             const request = {};
 
             request.measurement_id = measurementId;

@@ -63,7 +63,7 @@ const upload = async (request) => {
 
     return prismaClient.measurement.update({
         where: {
-            user_id: measurement.user_id,
+            measurement_id: measurement.measurement_id,
         },
         data: data,
         select: {

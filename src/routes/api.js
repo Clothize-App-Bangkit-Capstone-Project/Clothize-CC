@@ -1,6 +1,7 @@
 import express from "express";
 import customerController from "../controller/customer-controller";
 import measurementController from "../controller/measurement-controller";
+import tailorController from "../controller/tailor-controller";
 import userController from "../controller/user-controller";
 import { authMiddleware } from '../middleware/auth-middleware';
 
@@ -17,6 +18,9 @@ userRouter.post('/api/customers/current', customerController.register)
 userRouter.get('/api/customers/current', customerController.get)
 userRouter.patch('/api/customers/current', customerController.update)
 userRouter.post('/api/customers/upload', customerController.upload)
+
+//TAILOR API
+userRouter.post('api/tailors/current', tailorController.register);
 
 //MEASUREMENT API
 userRouter.post('/api/measurements/current', measurementController.insert)
