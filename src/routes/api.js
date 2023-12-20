@@ -20,8 +20,9 @@ userRouter.post('/api/customers/upload', customerController.upload)
 
 //MEASUREMENT API
 userRouter.post('/api/measurements/current', measurementController.insert)
-userRouter.get('/api/measurements/current', measurementController.getAll)
-userRouter.post('/api/measurements/upload/:measurementId', measurementController.upload)
+userRouter.get('/api/measurements/all', measurementController.getAll)
+userRouter.get('/api/measurements/current', measurementController.get)
+userRouter.post('/api/measurements/upload/:measurement_id', measurementController.upload)
 
 // //ORDER API
 // userRouter.post('/api/orders/create', orderController.createOrder);

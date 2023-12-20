@@ -37,6 +37,23 @@ const getAll = async (req, res, next) => {
     }
 }
 
+const get = async (req, res, next) => {
+    try {
+        const measurement_id = req.body.measurement_id
+
+        logger.info(measurement_id)
+
+        const result = await measurementService.get(measurement_id);
+
+        res.status(200).json({
+            message: result,
+            status: true
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 const upload = async (req, res, next) => {
     try {
         await processFileMeasurementsMiddleware(req, res);
@@ -104,5 +121,6 @@ const upload = async (req, res, next) => {
 export default {
     insert,
     getAll,
+    get,
     upload
 }

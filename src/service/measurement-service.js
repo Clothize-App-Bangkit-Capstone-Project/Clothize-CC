@@ -1,6 +1,6 @@
 import { prismaClient } from "../application/database"
 import { ResponseError } from "../error/response-error"
-import { getAllMeasurements, insertMeasurementValidation, uploadPictureMeasurementsValidation } from "../validation/measurement-validation"
+import { getAllMeasurements, getSpesificMeasurements, insertMeasurementValidation, uploadPictureMeasurementsValidation } from "../validation/measurement-validation"
 import { validate } from "../validation/validation"
 
 const insert = async (user, request) => {
@@ -42,7 +42,15 @@ const getAll = async (userId) => {
 }
 
 const get = async (measurement_id) => {
+    measurement_id = validate(getSpesificMeasurements, measurement_id);
 
+    const measurements = await prismaClient.measurement.findUnique({
+        where: {
+            measurement_id: measurement_id
+        }
+    })
+
+    return measurements
 }
 
 const upload = async (request) => {
@@ -68,5 +76,6 @@ const upload = async (request) => {
 export default {
     insert,
     getAll,
+    get,
     upload
 }

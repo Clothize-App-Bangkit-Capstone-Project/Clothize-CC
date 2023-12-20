@@ -14,12 +14,14 @@ const insertMeasurementValidation = Joi.object({
 
 const getAllMeasurements = Joi.string().max(255).required();
 
+const getSpesificMeasurements = Joi.number().integer().required()
+
 const uploadPictureMeasurementsValidation = Joi.object({
     user_id: Joi.string().max(255).required(),
     picture: Joi.string().max(255).required(),
 });
 
 export {
-    getAllMeasurements, insertMeasurementValidation, uploadPictureMeasurementsValidation
+    getAllMeasurements, getSpesificMeasurements, insertMeasurementValidation, uploadPictureMeasurementsValidation
 };
 
