@@ -1,6 +1,7 @@
 import { prismaClient } from "../application/database"
 import { ResponseError } from "../error/response-error"
 import { registerTailorValidation } from "../validation/tailor-validation"
+import { validate } from "../validation/validation"
 
 const register = async (request) => {
     const tailor = validate(registerTailorValidation, request)

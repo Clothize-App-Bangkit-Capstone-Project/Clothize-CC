@@ -20,7 +20,7 @@ userRouter.patch('/api/customers/current', customerController.update)
 userRouter.post('/api/customers/upload', customerController.upload)
 
 //TAILOR API
-userRouter.post('api/tailors/current', tailorController.register);
+userRouter.post('/api/tailors/current', tailorController.register);
 
 //MEASUREMENT API
 userRouter.post('/api/measurements/current', measurementController.insert)
