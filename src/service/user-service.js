@@ -8,14 +8,19 @@ import { validate } from "../validation/validation";
 const register = async (request) => {
     const user = validate(registerUserValidation, request);
 
-    const countUser = await prismaClient.user.count({
+    const countUsername = await prismaClient.user.count({
         where: {
             username: user.username,
-            email: user.email
         }
     })
 
-    if (countUser === 1) {
+    const countEmail = await prismaClient.user.count({
+        where: {
+            email: user.email,
+        }
+    })
+
+    if (countUsername === 1 || countEmail === 1) {
         throw new ResponseError(400, "User lready exists!")
     }
 
